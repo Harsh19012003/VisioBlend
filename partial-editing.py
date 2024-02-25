@@ -24,6 +24,7 @@ from PIL import Image
 def save_tensor(im_data, image_dir, image_name):
     im = tensor2im(im_data)
     save_path = os.path.join(image_dir, str(image_name)) #+ '.png'
+    print("\na\n")
     save_image(im, save_path)
 
 def tensor2im(input_image, imtype=np.uint8):
@@ -61,6 +62,7 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0):
     #     image_pil = image_pil.resize((h, int(w * aspect_ratio)), Image.BICUBIC)
     # elif aspect_ratio < 1.0:
     #     image_pil = image_pil.resize((int(h / aspect_ratio), w), Image.BICUBIC)
+    print("\nb\n")
     image_pil.save(image_path)
     
 def save_npz_img(name, img_array=None, path=None):
@@ -77,6 +79,7 @@ def save_npz_img(name, img_array=None, path=None):
     # this might fail if `img_array` contains a data type that is not supported by PIL,
     # in which case you could try casting it to a different dtype e.g.:
     # im = Image.fromarray(img_array.astype(np.uint8))
+    print("\nc\n")
     im.save(name)
     # im.show()
     
@@ -204,6 +207,7 @@ def main():
                 )
 
                 sample = postprocessing(sample)
+                print("\nd\n")
                 save_npz_img(
                     name=os.path.join(os.getcwd(), args.save_name, 'trans{}_sketch_{}_stroke_{}.jpg'.format(num, sketch_guidance_scale, stroke_guidance_scale)), 
                     img_array=sample.cpu().numpy())

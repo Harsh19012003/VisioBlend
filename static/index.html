@@ -12,16 +12,15 @@
     <section class="container">
         <div id="toolbar">
             
-            <!-- <label for="stroke">Stroke</label> -->
+            <label for="stroke">Stroke</label>              
             <label for="lineWidth" style="background-color: transparent;">Stroke Width
-                <input type="range" class="slider" id="lineWidth" name='lineWidth' min="1" max="30" step="1" value="5">   
-                <!-- <input id="lineWidth" name='lineWidth' type="number" value="5"> -->
+                <input type="range" class="slider" id="lineWidth" name='lineWidth' min="1" max="30" step="1" value="5">
             </label>
             <input id="stroke" name='stroke' type="color">
-            
+           
             <button id="clear">Clear</button>
             <button id="undo">Undo</button>
-            <!-- <button id="undo" style="background-color: gray;" disabled>Undo</button> -->
+            <!--<button id="undo" style="background-color: gray;" disabled>Undo</button>-->
             
             <label class="upload" style="margin-left: 5em; text-align: center">Upload
                 <input type="file" id="upload" style="display:None;" onchange="upload_image(this)" accept="image/png, image/jpg"/>
@@ -29,7 +28,7 @@
         </div>
 
         
-
+        
         <div class="slidecontainer">
             <p>Sketch scale <input type="range" class="slider" id="sk-scale" min="0.0" max="3.0" step="0.01" value="1.0"></p>   
             <p>Stroke scale <input type="range" class="slider" id="st-scale" min="0.0" max="3.0" step="0.01" value="1.0"></p> 
@@ -44,9 +43,9 @@
         </label>
         Region-aware S2I
         </div> -->
+        <!--
         <div>
         <label class="custom-select">
-            <!-- Select from number options -->
             Mode
             <select id="mode-select">
               <option value="1">S2I Generation</option>
@@ -55,6 +54,7 @@
             </select>
         </label>
         </div>
+        -->
 
         <canvas id="drawing-board"></canvas>    
 
@@ -482,10 +482,10 @@
                 url: "http://127.0.0.1:5000/generate",
                 data:{
                     imageBase64: dataURL,
-                    realism: re_scale.value,
-                    sketch: sk_scale.value,
-                    stroke: st_scale.value,
-                    mode: edit_mode.value
+                    realism: 1,
+                    sketch: 1,
+                    stroke: 1,
+                    mode: 1
                     // mode: edit_mode.checked
                 },
             })

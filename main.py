@@ -26,7 +26,7 @@ def setup_model():
         'clip_guidance_lambda': 1000, 'range_lambda': 50, 'lpips_sim_lambda': 1000, 'l2_sim_lambda': 10000,
         'background_preservation_loss': False, #'invert_mask': False, 'enforce_background': True, 
         'seed': 404, 'gpu_id': 0, 'output_path': 'output', 
-        'output_file': 'output.png', 'iterations_num': 1, 'batch_size': 1, 'save_video': False, 'export_assets': False}
+        'output_file': '', 'iterations_num': 1, 'batch_size': 1, 'save_video': False, 'export_assets': False}
     args = argparse.Namespace(**init_setting)
     image_editor = ImageEditor(args)
     return image_editor, args
@@ -104,17 +104,13 @@ def get_image():
     print(f"___________________________________{img_byte}______________________________________")
     print()
     print()
-    pred_image.save( img_byte, format('png'))
-    cv2.imshow(pred_image)
-    cv2.waitKey(0)
+    pred_image.save(img_byte, format('png'))
     image_binary = img_byte.getvalue()
     
     # save it 
     # THESE THREE LINE TO CHECK THE RESPONSE STATUS
     im = Image.open(image_byte).convert('RGB')
-    im.save('tmp.png')  
-    # with open("tmp.png", 'rb') as bites:
-    #     image_binary = bites.read()
+    im.save('tmp.png')
     
     image = base64.b64encode(image_binary).decode("utf-8")
     return jsonify({'status': True, 'image': image})
@@ -122,7 +118,7 @@ def get_image():
 
 @app.route('/')
 def index():
-    return current_app.send_static_file('index2.html')
+    return current_app.send_static_file('index.html')
 
 if __name__ == '__main__':
     app.run(threaded=True, host='127.0.0.1')
