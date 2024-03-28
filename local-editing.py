@@ -6,6 +6,7 @@ numpy array. This can be used to produce samples for FID evaluation.
 import argparse
 import os
 from pickle import FALSE
+import random
 
 import numpy as np
 import torch
@@ -25,7 +26,8 @@ from PIL import Image
 
 def save_tensor(im_data, image_dir, image_name):
     im = tensor2im(im_data)
-    save_path = os.path.join(image_dir, str(image_name)) #+ '.png'
+    randnum = random.randint(0,100)
+    save_path = os.path.join(image_dir, str(image_name), str(randnum)) #+ '.png'
     save_image(im, save_path)
 
 def tensor2im(input_image, imtype=np.uint8):

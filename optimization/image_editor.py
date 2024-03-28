@@ -203,7 +203,7 @@ class ImageEditor:
             return out
 
 
-        save_image_interval = self.diffusion.num_timesteps // 5
+        save_image_interval = self.diffusion.num_timesteps // 50
         for iteration_number in range(self.args.iterations_num):
             print(f"Start iterations {iteration_number}")
             print(self.args)
@@ -257,17 +257,17 @@ class ImageEditor:
                     range_t=self.args.range_t,
                     partial_edit=self.args.partial_edit,
                 )
-
+            randnum = 0
             intermediate_samples = [[] for i in range(self.args.batch_size)]
             total_steps = self.diffusion.num_timesteps - self.args.skip_timesteps - 1
             for j, sample in enumerate(samples):
                 should_save_image = j % save_image_interval == 0 or j == total_steps
                 if should_save_image or self.args.save_video:
-
                     for b in range(self.args.batch_size):
+                        randnum += 1
                         pred_image = sample["pred_xstart"][b]
                         visualization_path = Path(
-                            os.path.join(self.args.output_path, self.args.output_file)
+                            os.path.join(self.args.output_path, self.args.output_file, str(randnum))
                         )
 
                         pred_image = pred_image.add(1).div(2).clamp(0, 1)
